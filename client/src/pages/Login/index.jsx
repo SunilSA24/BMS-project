@@ -1,12 +1,37 @@
-import { Button, Form, Input } from "antd";
-import { Link } from "react-router-dom";
+import { Button, Form, Input, message } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import { loginUser } from "../../../apiCals/user";
 
 function Login() {
-  const onFinish = () => {
+  const navigate = useNavigate();
+  const [messageApi, contentHeader] = message.useMessage();
+  const onFinish = async(value) => {
+     try {
+      const response = await loginUser(value);
+      if(response.success) {
+        messageApi.open({
+          type: "success",
+          content: "Login Successful",
+        })
+        navigate("/");
+        localStorage.setItem("token", response.data);
+      } else {
+         messageApi.open({
+          type: "error",
+          content: response.message,
+        })
+      }
+     } catch (err) {
+       messageApi.open({
+          type: "error",
+          content: err,
+        })
+     }
 
   }
   return (
     <div>
+      {contentHeader}
       <header className="App-header">
         <main className="main-area mw-500 text-center px-3">
           <section className="left-section">
