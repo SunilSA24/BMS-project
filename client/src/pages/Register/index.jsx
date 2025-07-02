@@ -1,9 +1,32 @@
-import { Button, Form, Input } from "antd";
-import { Link } from "react-router-dom";
+import { Button, Form, Input, message } from "antd";
+import { Link, useNavigate } from "react-router-dom";
+import { RegisterUser } from "../../../apiCals/user";
 
 function Register() {
-  const onFinish = () => {
+  const [messageApi, contentHeader] = message.useMessage();
+  const navigate = useNavigate()
 
+  const onFinish = async (value) => {
+    try {
+      const response = await RegisterUser(value);
+      if (response.success) {
+        message.open({
+          type: "success",
+          content: "Registration successful",
+        })
+        navigate("/login");
+      } else {
+        messageApi.open({
+          type: "error",
+          content: response.message,
+        })
+      }
+    } catch (err) {
+      messageApi.open({
+          type: "error",
+          content: err,
+        });
+    }
   }
   return (
     <div>
@@ -13,7 +36,7 @@ function Register() {
             <h1>Login to BMS</h1>
           </section>
           <section className="right-section">
-             <Form layout="vertical" onFinish={onFinish}>
+            <Form layout="vertical" onFinish={onFinish}>
               <Form.Item
                 label="Email"
                 htmlFor="email"
