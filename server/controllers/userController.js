@@ -63,4 +63,18 @@ const loginUser = async (req, res) => {
     }
 }
 
-module.exports = { registerUser, loginUser }
+const getCurrentUser = async(req, res) => {
+    try {
+        const user = await User.findById(req.body.userId).select("-password");
+        res.send({
+            success: true,
+            message: "User details fetched successfully",
+            data: user
+        });
+    } catch(err) {
+        console.log(err)
+        res.status(500).json({success: false, message: err})
+    }
+}
+
+module.exports = { registerUser, loginUser, getCurrentUser }
