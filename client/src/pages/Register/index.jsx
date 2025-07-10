@@ -1,6 +1,6 @@
 import { Button, Form, Input, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import { RegisterUser } from "../../../apiCals/user";
+import { RegisterUser } from "../../../apiCalls/user";
 
 function Register() {
   const [messageApi, contentHeader] = message.useMessage();
