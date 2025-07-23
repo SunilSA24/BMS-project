@@ -1,7 +1,6 @@
 import { Button, Form, Input, message } from "antd";
 import { Link, useNavigate } from "react-router-dom";
-import { loginUser } from "../../../apiCalls/user";
-
+import { loginUser } from "../../apiCalls/user";
 function Login() {
   const navigate = useNavigate();
   const [messageApi, contentHeader] = message.useMessage();

@@ -1,20 +1,46 @@
 import { Col, Modal, Row, Form, Input, Select, Button } from "antd";
 import TextArea from "antd/es/input/TextArea";
-import { addMovie, updateMovie } from "../../apicalls/movie";
+import { addMovie, updateMovie } from "../../apiCalls/movie";
 import moment from "moment";
 
 function MovieForm({
     isModalOpen,
     setIsModalOpen,
     formType,
+    fetchAllMovies,
     selectedMovie,
     setSelectedMovie,
-    fetchAllMovies,
 }) {
     if (selectedMovie) {
         selectedMovie.releaseDate = moment(selectedMovie.releaseDate).format(
             "YYYY-MM-DD"
         );
+    }
+    const handleCancel = () => {
+        setIsModalOpen(false);
+        setSelectedMovie(null);
+    }
+
+    const onFinish = async(values) => {
+        console.log("values:", values);
+        try{
+            let response  = null;
+            if(formType === "add") {
+                response = await addMovie(values);
+            } else {
+                response = await updateMovie(selectedMovie._id, values);
+            }
+            
+            if(response.success) {
+                fetchAllMovies();
+                setIsModalOpen(false);
+                setSelectedMovie(null);
+            } else {
+                console.log(response.message);
+            }
+        } catch(err) {
+            console.log(err);
+        }
     }
     return (
         <div>

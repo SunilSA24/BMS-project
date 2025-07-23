@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { getCurrentUser } from '../../apiCalls/user';
+import { getCurrentUser } from '../apiCalls/user';
 import { useDispatch, useSelector } from 'react-redux';
 import { setUser } from '../redux/userSlice';
 import { hideLoading, showLoading } from '../redux/loaderSlice';
@@ -13,7 +13,7 @@ import {
 import { Layout, Menu } from "antd";
 import { Header } from "antd/es/layout/layout";
 
-function ProtectedRoute({children}) {
+function ProtectedRoute({ children }) {
   const navigate = useNavigate();
 
   const { user } = useSelector((state) => state.user);
@@ -31,7 +31,7 @@ function ProtectedRoute({children}) {
     }
   }
 
-   const navItems = [
+  const navItems = [
     {
       label: "Home",
       icon: <HomeOutlined />,

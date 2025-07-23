@@ -51,7 +51,7 @@ const deleteTheatre = async (req, res) => {
 
     res.send({
       success: true,
-      message: "Theatre was delete successfully",
+      message: "Theatre was deleted successfully",
     });
   } catch (err) {
     res.status(500).send({ success: false, message: err.message });
