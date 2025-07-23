@@ -31,7 +31,7 @@ function ProtectedRoute({children}) {
     }
   }
 
-  const navItems = [
+   const navItems = [
     {
       label: "Home",
       icon: <HomeOutlined />,
