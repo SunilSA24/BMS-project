@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { getCurrentUser } from '../../../apiCalls/user';
+import { getCurrentUser } from '../../apiCalls/user';
 
 function Home() {
   const navigate = useNavigate();

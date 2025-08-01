@@ -4,21 +4,27 @@ const userSchema = new mongoose.Schema({
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
+    role: {
+        type: String,
+        enum: ["admin", "user", "partner"],
+        required: true,
+        default: "user",
+    },
 });
 
 // Pre-Save hook
-userSchema.pre("save", function(next) {
+userSchema.pre("save", function (next) {
     console.log("pre-save hook", this);
     const now = new Date();
     this.updatedAt = now;
-    if(!this.createdAt) {
+    if (!this.createdAt) {
         this.createdAt = now;
     }
     next();
 });
 
 // Post-save hook
-userSchema.post("save", function(document, next) {
+userSchema.post("save", function (document, next) {
     console.log(`User ${document} has been saved`);
     next();
 })
