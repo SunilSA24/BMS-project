@@ -15,6 +15,7 @@ const addTheatre = async (req, res) => {
 };
 
 const updateTheatre = async (req, res) => {
+  debugger
   try {
     const theatreExists = await Theatre.findById(req.params.theatreId);
 
@@ -59,6 +60,7 @@ const deleteTheatre = async (req, res) => {
 };
 
 const getAllTheatres = async (req, res) => {
+  debugger
   try {
     const allTheatres = await Theatre.find({}).populate("owner");
     res.send({

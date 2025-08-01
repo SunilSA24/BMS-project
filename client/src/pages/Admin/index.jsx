@@ -27,7 +27,7 @@ function Admin() {
     if (user !== "null" && user.role !== "admin") {
       navigate("/");
     }
-  });
+  }, [user]);
 
   return (
     <div>

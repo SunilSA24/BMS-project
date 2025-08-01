@@ -5,8 +5,6 @@ const userRouter = require("./router/useRouter");
 const movieRouter = require("./router/movieRouter");
 const theatreRouter = require("./router/theatreRouter");
 
-
-
 require('dotenv').config();
 require("./dbConfig");
 
